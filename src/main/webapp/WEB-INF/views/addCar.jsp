@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -41,10 +42,34 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Welcome in our Car Rental!</h1>
-          <a href="<spring:url value="/login" />"> Zaloguj.</a>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Show cars </a></p>  <p><a class="btn btn-primary btn-lg" href="#" role="button">Show cars </a></p>
+       
+       <form:form modelAttribute="newCar" method="post" class="form-horizontal">
+			<fieldset>
+			
+				<div class="form-group">
+						<div class="col-lg-10"> 
+						ID:<form:input id="carId" path="carId" type="number" class="form:input-large"/> <br />
+						Nazwa:<form:input id="carName" path="carName" type="text" class="form:input-large"/> <br />
+						ROK PROD:<form:input id="carProductionYear" path="carProductionYear" type="number" class="form:input-large"/> <br />
+						CENA WYNAJMU:<form:input id="rentPrice" path="rentPrice" type="number" class="form:input-large"/> <br />
+						DOSTEPNOSC<form:checkbox path="carIsAvailable"></form:checkbox> <br />						
+					</div>
+				</div>
+
+			
+		
+				
+
+
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add New Car"/>
+					</div>
+				</div>
+				
+			</fieldset>
+		</form:form>
+       <p><a class="btn btn-primary btn-lg" href="#" role="button">Show cars </a></p>
       </div>
     </div>
 

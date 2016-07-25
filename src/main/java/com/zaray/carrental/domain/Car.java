@@ -26,7 +26,7 @@ public class Car {
 	private double rentPrice;
 	
 	@Column
-	private boolean carIsAvailable;
+	private Boolean carIsAvailable;
 
 
 	public int getCarId() {
@@ -61,13 +61,15 @@ public class Car {
 		this.rentPrice = rentPrice;
 	}
 
-	public boolean isCarIsAvailable() {
+	public Boolean getCarIsAvailable() {
 		return carIsAvailable;
 	}
 
-	public void setAvailableCar(boolean isAvailableCar) {
-		this.carIsAvailable = isAvailableCar;
+	public void setCarIsAvailable(Boolean carIsAvailable) {
+		this.carIsAvailable = carIsAvailable;
 	}
+
+
 	
 	
 	
