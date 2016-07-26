@@ -12,9 +12,8 @@ public class Car {
 		this.carIsAvailable = true;
 	}
 	
-	@GeneratedValue
 	@Id
-	private int carId;
+	private Long carId;
 	
 	@Column
 	private String carName;
@@ -29,11 +28,11 @@ public class Car {
 	private Boolean carIsAvailable;
 
 
-	public int getCarId() {
+	public Long getCarId() {
 		return carId;
 	}
 
-	public void setCarId(int carId) {
+	public void setCarId(Long carId) {
 		this.carId = carId;
 	}
 
