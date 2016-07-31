@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="true"%>
 <html>
 <head>
@@ -14,31 +15,42 @@
 
 
 <body>
-
-	<%@include file="header.jsp" %>
+<%@include file="header.jsp" %>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Welcome in our Car Rental!</h1>
 
-			<c:forEach items="${carList}" var="car">
-				<c:if test="${car.carIsAvailable}">
-					<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-						<div class="thumbnail">
-						Nazwa:${car.carName}  <br />
-						Rocznik:${car.carProductionYear} <br />
-						Cena wynajmu: ${car.rentPrice} <br />
-						Dostepny: tak<br />
-						<a
-									href=" <spring:url value="/showCar?id=${car.carId}" /> "
-									class="btn btn-primary"> <span
-									class="glyphicon-info-sign glyphicon" /></span> Wynajmij
-								</a></div>
+
+			<fieldset>
+
+				<div class="form-group">
+					<div class="col-lg-10">
+						<div class="form-group">
+									<div class="col-lg-10">
+										<br /> <br /> ID: Nazwa:${car.carName} <br />
+										Rocznik:${car.carProductionYear} <br /> Cena wynajmu:
+										${car.rentPrice} <br /> Dostepny: tak<br /> <br />
+									</div>
+								</div>
+						<form:form modelAttribute="createRentOrder" method="post"
+							class="form-horizontal">
+							<fieldset>
+								
+								<div class="form-group">
+									<input type="submit" name="edit" class="btn btn-primary"
+										value="Wynajmij" />
+							</fieldset>
+						</form:form>
 					</div>
-				</c:if>
-			</c:forEach>
+				</div>
+			</fieldset>
 
+			<p>
+				<a class="btn btn-primary btn-lg"
+					href="<spring:url value="/carList" /> " role="button">Show cars
+				</a>
+			</p>
 		</div>
 	</div>
 

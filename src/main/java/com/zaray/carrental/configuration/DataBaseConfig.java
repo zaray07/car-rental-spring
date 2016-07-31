@@ -2,9 +2,9 @@ package com.zaray.carrental.configuration;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -25,19 +25,6 @@ import com.zaray.carrental.repository.CarRepository;
 public class DataBaseConfig{
  
    @Bean
-   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-      em.setDataSource(dataSource());
-      em.setPackagesToScan(new String[] { "com.zaray.carrental.domain" });
- 
-      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-      em.setJpaVendorAdapter(vendorAdapter);
-      em.setJpaProperties(additionalProperties());
- 
-      return em;
-   }
- 
-   @Bean
    public DataSource dataSource(){
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -45,16 +32,8 @@ public class DataBaseConfig{
       dataSource.setUsername( "root" );
       dataSource.setPassword( "admin" );
       return dataSource;
-   }
- 
-   @Bean
-   public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-      JpaTransactionManager transactionManager = new JpaTransactionManager();
-      transactionManager.setEntityManagerFactory(emf);
- 
-      return transactionManager;
-   }
- 
+   }  
+   
    @Bean
    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
       return new PersistenceExceptionTranslationPostProcessor();
@@ -66,4 +45,30 @@ public class DataBaseConfig{
       properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
       return properties;
    }
+   
+  @Bean
+   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+      em.setDataSource(dataSource());
+      em.setPackagesToScan(new String[] { "com.zaray.carrental.domain" }); 
+      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+      em.setJpaVendorAdapter(vendorAdapter);
+      em.setJpaProperties(additionalProperties()); 
+      return em;
+   }
+   
+   @Bean
+   public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+      JpaTransactionManager transactionManager = new JpaTransactionManager();
+      transactionManager.setEntityManagerFactory(emf);
+      return transactionManager;
+   }
+   
+@Bean
+   public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+       return entityManagerFactory.createEntityManager();
+   }
+
 }
+   
+   

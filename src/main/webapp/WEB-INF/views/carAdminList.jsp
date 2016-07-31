@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
 <!-- Latest compiled and minified CSS -->
@@ -15,40 +15,14 @@
 
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Zaray Car Rental</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-success">Sign in</button>
-				</form>
-			</div>
-			<!--/.navbar-collapse -->
-		</div>
-	</nav>
-
+	<%@include file="header.jsp" %>
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Welcome in our Car Rental!</h1>
 
 			<c:forEach items="${carList}" var="car">
-				<c:if test="${car.carIsAvailable}">
+				
 					<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
 						<div class="thumbnail">
 						Nazwa:${car.carName}  <br />
@@ -62,7 +36,7 @@
 								</a></div>
 						
 					</div>
-				</c:if>
+				
 			</c:forEach>
 
 		</div>
