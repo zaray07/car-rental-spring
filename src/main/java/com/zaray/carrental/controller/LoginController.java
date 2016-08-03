@@ -8,22 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.zaray.carrental.repository.LoginRepository;
+import com.zaray.carrental.service.LoginService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private LoginRepository loginRepository;
+	private LoginService loginService;
 	
 	@RequestMapping(method = RequestMethod.POST, params = "loginForm")
 	public String loginFormPost( @RequestParam("userEmail") String userEmail,
 			@RequestParam("userPassword") String userPassword, HttpServletRequest request, ModelAndView modelAndView) {
 
-		boolean userExists = loginRepository.checkLogin(userEmail,userPassword);
+		boolean userExists = loginService.checkLogin(userEmail,userPassword);
 	if(userExists){
 	request.getSession().setAttribute("userIsLogin", "logged");
-System.out.println("test wykonany");
 }
 		
 		return "redirect:/carList";
