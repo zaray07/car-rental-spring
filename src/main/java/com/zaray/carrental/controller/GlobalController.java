@@ -12,6 +12,7 @@ public class GlobalController {
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
 		model.addAttribute("user", request.getSession().getAttribute("userIsLogin"));
+		model.addAttribute("userName", request.getSession().getAttribute("userName"));
 	}
 
 }

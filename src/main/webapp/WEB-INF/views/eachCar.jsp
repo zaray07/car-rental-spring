@@ -15,7 +15,7 @@
 
 
 <body>
-<%@include file="header.jsp" %>
+	<%@include file="header.jsp"%>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
@@ -27,30 +27,32 @@
 				<div class="form-group">
 					<div class="col-lg-10">
 						<div class="form-group">
-									<div class="col-lg-10">
-										<br /> <br /> ID: Nazwa:${car.carName} <br />
-										Rocznik:${car.carProductionYear} <br /> Cena wynajmu:
-										${car.rentPrice} <br /> Dostepny: tak<br /> <br />
-									</div>
-								</div>
-						<form:form modelAttribute="createRentOrder" method="post"
-							class="form-horizontal">
-							<fieldset>
-								
-								<div class="form-group">
-									<input type="submit" name="edit" class="btn btn-primary"
-										value="Wynajmij" />
-							</fieldset>
-						</form:form>
+							<div class="col-lg-10">
+								<br /> <br /> ID: Nazwa:${car.carName} <br />
+								Rocznik:${car.carProductionYear} <br /> Cena wynajmu:
+								${car.rentPrice} <br /> Dostepny: tak<br /> <br />
+							</div>
+						</div>
+
 					</div>
+
 				</div>
 			</fieldset>
 
-			<p>
-				<a class="btn btn-primary btn-lg"
-					href="<spring:url value="/carList" /> " role="button">Show cars
-				</a>
-			</p>
+
+			<a class="btn btn-primary btn-lg"
+				href="<spring:url value="/carList" /> " role="button">Show cars
+			</a>
+			<c:if test="${user ne 'logged'}">				
+					Tylko zalogowani moga wynajac samochod.
+						</c:if>
+			<c:if test="${user eq 'logged'}">
+				<form:form modelAttribute="createRentOrder" method="post">
+					
+						<input type="submit" name="edit" class="btn btn-primary"
+							value="Wynajmij" />
+				</form:form>
+			</c:if>
 		</div>
 	</div>
 

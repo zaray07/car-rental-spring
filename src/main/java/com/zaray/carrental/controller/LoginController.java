@@ -15,16 +15,17 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
-	
+
 	@RequestMapping(method = RequestMethod.POST, params = "loginForm")
-	public String loginFormPost( @RequestParam("userEmail") String userEmail,
+	public String loginFormPost(@RequestParam("userEmail") String userEmail,
 			@RequestParam("userPassword") String userPassword, HttpServletRequest request, ModelAndView modelAndView) {
 
-		boolean userExists = loginService.checkLogin(userEmail,userPassword);
-	if(userExists){
-	request.getSession().setAttribute("userIsLogin", "logged");
-}
-		
+		boolean userExists = loginService.checkLogin(userEmail, userPassword);
+		if (userExists) {
+			request.getSession().setAttribute("userIsLogin", "logged");
+			request.getSession().setAttribute("userName", userEmail);
+		}
+
 		return "redirect:/carList";
 	}
 

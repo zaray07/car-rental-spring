@@ -22,7 +22,7 @@ public class Car {
 	private int carProductionYear;	
 	
 	@Column
-	private double rentPrice;
+	private long rentPrice;
 	
 	@Column
 	private Boolean carIsAvailable;
@@ -52,11 +52,11 @@ public class Car {
 		this.carProductionYear = carProductionYear;
 	}
 
-	public double getRentPrice() {
+	public long getRentPrice() {
 		return rentPrice;
 	}
 
-	public void setRentPrice(double rentPrice) {
+	public void setRentPrice(long rentPrice) {
 		this.rentPrice = rentPrice;
 	}
 
